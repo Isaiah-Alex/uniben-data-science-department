@@ -1,25 +1,33 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Calendar, Search, ChevronLeft, ChevronRight } from 'lucide-react';
-import { ImageWithFallback } from '@/components/shared/ImageWithFallback';
-import { NewsItem } from '@/lib/data/news';
+import { useState } from "react";
+import Link from "next/link";
+import { Calendar, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { NewsItem } from "@/lib/data/news";
 
 const ITEMS_PER_PAGE = 4;
-const categories = ['All', 'Achievement', 'Research', 'Partnership', 'Event', 'Curriculum', 'Alumni'];
+const categories = [
+  "All",
+  "Achievement",
+  "Research",
+  "Partnership",
+  "Event",
+  "Curriculum",
+  "Alumni",
+];
 
 const recentPosts = [
-  { title: 'Data Science Workshop Series Begins', date: 'June 13, 2026' },
-  { title: 'Guest Lecture: Ethics in AI', date: 'June 12, 2026' },
-  { title: 'Student Hackathon Registration Open', date: 'June 11, 2026' },
-  { title: 'Department Newsletter June 2026', date: 'June 10, 2026' }
+  { title: "Data Science Workshop Series Begins", date: "June 13, 2026" },
+  { title: "Guest Lecture: Ethics in AI", date: "June 12, 2026" },
+  { title: "Student Hackathon Registration Open", date: "June 11, 2026" },
+  { title: "Department Newsletter June 2026", date: "June 10, 2026" },
 ];
 
 const upcomingEvents = [
-  { title: 'Open House for Prospective Students', date: 'June 20, 2026' },
-  { title: 'Industry Panel Discussion', date: 'June 25, 2026' },
-  { title: 'Research Showcase', date: 'July 1, 2026' }
+  { title: "Open House for Prospective Students", date: "June 20, 2026" },
+  { title: "Industry Panel Discussion", date: "June 25, 2026" },
+  { title: "Research Showcase", date: "July 1, 2026" },
 ];
 
 interface NewsContentProps {
@@ -27,23 +35,28 @@ interface NewsContentProps {
 }
 
 export function NewsContent({ allNews }: NewsContentProps) {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredByCategory = activeCategory === 'All'
-    ? allNews
-    : allNews.filter((n) => n.category === activeCategory);
+  const filteredByCategory =
+    activeCategory === "All"
+      ? allNews
+      : allNews.filter((n) => n.category === activeCategory);
 
   const filtered = searchQuery.trim()
-    ? filteredByCategory.filter((n) => 
-        n.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        n.summary.toLowerCase().includes(searchQuery.toLowerCase())
+    ? filteredByCategory.filter(
+        (n) =>
+          n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          n.summary.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : filteredByCategory;
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const paginated = filtered.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
@@ -62,8 +75,8 @@ export function NewsContent({ allNews }: NewsContentProps) {
               onClick={() => handleCategoryChange(category)}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
                 activeCategory === category
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-foreground hover:bg-primary hover:text-primary-foreground'
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
               }`}
             >
               {category}
@@ -73,17 +86,19 @@ export function NewsContent({ allNews }: NewsContentProps) {
 
         {/* News List */}
         {paginated.length === 0 ? (
-          <p className="text-muted-foreground py-12 text-center">No articles found in this category.</p>
+          <p className="text-muted-foreground py-12 text-center">
+            No articles found in this category.
+          </p>
         ) : (
           <div className="space-y-8">
             {paginated.map((news, index) => (
               <article
                 key={news.id}
-                className={`group ${index !== paginated.length - 1 ? 'pb-8 border-b border-border' : ''}`}
+                className={`group ${index !== paginated.length - 1 ? "pb-8 border-b border-border" : ""}`}
               >
                 <Link href={`/news/${news.id}`} className="block">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="md:col-span-1 relative aspect-[4/3] overflow-hidden bg-muted">
+                    <div className="md:col-span-1 relative aspect-4/3 overflow-hidden bg-muted">
                       <ImageWithFallback
                         src={news.image}
                         alt={news.title}
@@ -129,19 +144,21 @@ export function NewsContent({ allNews }: NewsContentProps) {
             </button>
 
             <div className="flex items-center gap-1">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`w-9 h-9 text-sm font-medium transition-colors ${
-                    page === currentPage
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground hover:bg-muted bg-background border border-border'
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-9 h-9 text-sm font-medium transition-colors ${
+                      page === currentPage
+                        ? "bg-primary text-primary-foreground"
+                        : "text-foreground hover:bg-muted bg-background border border-border"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ),
+              )}
             </div>
 
             <button
@@ -165,7 +182,10 @@ export function NewsContent({ allNews }: NewsContentProps) {
               type="text"
               placeholder="Search news..."
               value={searchQuery}
-              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full px-4 py-3 pl-11 border border-border bg-background text-foreground focus:outline-none focus:border-primary transition-colors text-sm"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -174,7 +194,10 @@ export function NewsContent({ allNews }: NewsContentProps) {
 
         {/* Recent Posts */}
         <div className="mb-8">
-          <h3 className="text-xl font-bold mb-4 pb-3 border-b border-border" style={{ fontFamily: 'var(--font-sans)' }}>
+          <h3
+            className="text-xl font-bold mb-4 pb-3 border-b border-border"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
             Recent Posts
           </h3>
           <div className="space-y-4">
@@ -183,10 +206,15 @@ export function NewsContent({ allNews }: NewsContentProps) {
                 key={index}
                 className="block pb-4 border-b border-border last:border-0 group"
               >
-                <h4 className="font-medium leading-snug text-[15px]" style={{ fontFamily: 'var(--font-sans)' }}>
+                <h4
+                  className="font-medium leading-snug text-[15px]"
+                  style={{ fontFamily: "var(--font-sans)" }}
+                >
                   {post.title}
                 </h4>
-                <p className="mt-1 text-xs text-muted-foreground">{post.date}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {post.date}
+                </p>
               </div>
             ))}
           </div>
@@ -194,16 +222,27 @@ export function NewsContent({ allNews }: NewsContentProps) {
 
         {/* Upcoming Events */}
         <div className="bg-muted p-6 border border-border">
-          <h3 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
+          <h3
+            className="text-xl font-bold mb-4"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
             Upcoming Events
           </h3>
           <div className="space-y-4">
             {upcomingEvents.map((event, index) => (
-              <div key={index} className="pb-4 border-b border-border last:border-0">
-                <h4 className="font-medium leading-snug text-[15px]" style={{ fontFamily: 'var(--font-sans)' }}>
+              <div
+                key={index}
+                className="pb-4 border-b border-border last:border-0"
+              >
+                <h4
+                  className="font-medium leading-snug text-[15px]"
+                  style={{ fontFamily: "var(--font-sans)" }}
+                >
                   {event.title}
                 </h4>
-                <p className="mt-1 text-xs text-primary font-medium">{event.date}</p>
+                <p className="mt-1 text-xs text-primary font-medium">
+                  {event.date}
+                </p>
               </div>
             ))}
           </div>
@@ -211,7 +250,10 @@ export function NewsContent({ allNews }: NewsContentProps) {
 
         {/* Categories */}
         <div className="mt-8">
-          <h3 className="text-xl font-bold mb-4 pb-3 border-b border-border" style={{ fontFamily: 'var(--font-sans)' }}>
+          <h3
+            className="text-xl font-bold mb-4 pb-3 border-b border-border"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
             Categories
           </h3>
           <div className="space-y-2">
@@ -221,8 +263,8 @@ export function NewsContent({ allNews }: NewsContentProps) {
                 onClick={() => handleCategoryChange(category)}
                 className={`w-full text-left px-4 py-2 text-sm transition-colors rounded-sm ${
                   activeCategory === category
-                    ? 'text-primary bg-primary/10 font-medium'
-                    : 'hover:bg-muted text-foreground'
+                    ? "text-primary bg-primary/10 font-medium"
+                    : "hover:bg-muted text-foreground"
                 }`}
               >
                 {category}

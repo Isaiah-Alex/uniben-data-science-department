@@ -1,22 +1,25 @@
-import Link from 'next/link';
-import { Calendar, Clock } from 'lucide-react';
-import { ImageWithFallback } from '@/components/shared/ImageWithFallback';
-import { NewsItem } from '@/lib/data/news';
+import Link from "next/link";
+import { Calendar, Clock } from "lucide-react";
+import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { NewsItem } from "@/lib/data/news";
 
 interface HeroSectionProps {
   featuredStory: NewsItem;
   latestUpdates: NewsItem[];
 }
 
-export function HeroSection({ featuredStory, latestUpdates }: HeroSectionProps) {
+export function HeroSection({
+  featuredStory,
+  latestUpdates,
+}: HeroSectionProps) {
   return (
     <section className="border-b border-border bg-background">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
+      <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Featured Story */}
           <div className="lg:col-span-8">
             <Link href={`/news/${featuredStory.id}`} className="group block">
-              <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+              <div className="relative aspect-16/10 overflow-hidden bg-muted">
                 <ImageWithFallback
                   src={featuredStory.image}
                   alt={featuredStory.title}
@@ -49,7 +52,10 @@ export function HeroSection({ featuredStory, latestUpdates }: HeroSectionProps) 
 
           {/* Latest Updates Sidebar */}
           <div className="lg:col-span-4">
-            <h3 className="text-xl font-bold mb-6 pb-3 border-b border-border" style={{ fontFamily: 'var(--font-sans)' }}>
+            <h3
+              className="text-xl font-bold mb-6 pb-3 border-b border-border"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
               Latest Updates
             </h3>
             <div className="space-y-4">
@@ -62,10 +68,15 @@ export function HeroSection({ featuredStory, latestUpdates }: HeroSectionProps) 
                   <span className="text-xs font-medium text-primary uppercase tracking-wider">
                     {update.category}
                   </span>
-                  <h4 className="mt-2 font-medium leading-snug group-hover:text-primary transition-colors text-[15px]" style={{ fontFamily: 'var(--font-sans)' }}>
+                  <h4
+                    className="mt-2 font-medium leading-snug group-hover:text-primary transition-colors text-[15px]"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                  >
                     {update.title}
                   </h4>
-                  <p className="mt-1 text-xs text-muted-foreground">{update.date}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {update.date}
+                  </p>
                 </Link>
               ))}
             </div>
