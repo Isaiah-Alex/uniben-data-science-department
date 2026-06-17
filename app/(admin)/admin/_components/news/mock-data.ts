@@ -1,0 +1,58 @@
+import { News } from "./types";
+
+export const mockNews: News[] = [
+  {
+    id: "1",
+    title: "Department Launches AI Research Initiative",
+    category: "news",
+    status: "published",
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=120&h=80&fit=crop",
+    publishedAt: "12 Jun 2026",
+    updatedAt: "2 hours ago",
+  },
+  {
+    id: "2",
+    title: "Call for Applications: MSc Data Science 2026/2027",
+    category: "announcement",
+    status: "published",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=120&h=80&fit=crop",
+    publishedAt: "10 Jun 2026",
+    updatedAt: "1 day ago",
+  },
+  {
+    id: "3",
+    title: "Faculty Seminar: Ethics in Artificial Intelligence",
+    category: "news",
+    status: "scheduled",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=120&h=80&fit=crop",
+    publishedAt: "20 Jun 2026",
+    updatedAt: "3 days ago",
+  },
+  {
+    id: "4",
+    title: "Partnership with NITDA Signed for Student Internships",
+    category: "announcement",
+    status: "draft",
+    image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=120&h=80&fit=crop",
+    publishedAt: "—",
+    updatedAt: "5 days ago",
+  },
+  {
+    id: "5",
+    title: "2025 Annual Research Showcase — Highlights",
+    category: "news",
+    status: "archived",
+    image: "https://images.unsplash.com/photo-1559523161-0fc0d8b814e3?w=120&h=80&fit=crop",
+    publishedAt: "15 Jan 2026",
+    updatedAt: "5 months ago",
+  },
+  {
+    id: "6",
+    title: "Deadline Extended: Conference Abstract Submissions",
+    category: "announcement",
+    status: "draft",
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=120&h=80&fit=crop",
+    publishedAt: "—",
+    updatedAt: "6 days ago",
+  },
+];
