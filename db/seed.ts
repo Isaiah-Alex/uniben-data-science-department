@@ -477,7 +477,7 @@ export const seedDashboardStats: DashboardStat[] = [
     label: "News Posts",
     value: "9",
     change: "3 this month",
-    href: "/news",
+    href: "/admin/news",
     iconName: "Newspaper",
     color: "#D97706",
   },

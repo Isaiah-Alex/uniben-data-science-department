@@ -2,6 +2,18 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+button, a {
+  @apply cursor-pointer
+}
+
+.outline-button {
+  @apply border-2 border-primary-foreground bg-primary px-8 py-6 text-base text-primary-foreground hover:text-primary
+}
+
+button:disabled, a:disabled {
+  @apply cursor-not-allowed opacity-50
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

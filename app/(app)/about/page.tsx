@@ -91,7 +91,7 @@ export default function AboutRoute() {
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-border">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="px-4 md:px-6 lg:px-16 py-16 md:py-24 flex flex-col justify-center max-w-[600px] mx-auto lg:mx-0">
+          <div className="px-4 md:px-6 lg:px-16 py-16 md:py-24 flex flex-col justify-center max-w-150 mx-auto lg:mx-0">
             <span className="inline-block text-xs font-medium text-primary uppercase tracking-widest mb-4">
               Since 2018
             </span>
@@ -160,7 +160,7 @@ export default function AboutRoute() {
 
       {/* Mission & Vision */}
       <section className="border-b border-border bg-background">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-16">
+        <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="border-l-4 border-primary pl-8">
               <h2
@@ -196,7 +196,7 @@ export default function AboutRoute() {
 
       {/* Core Values */}
       <section className="bg-muted border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-16">
+        <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
           <h2 className="text-3xl md:text-[40px] mb-3">Our Values</h2>
           <p className="text-muted-foreground mb-12 text-lg">
             The principles that guide everything we do.
@@ -227,7 +227,7 @@ export default function AboutRoute() {
 
       {/* Leadership */}
       <section className="border-b border-border bg-background">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-16">
+        <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
           <div className="flex justify-between items-center mb-10">
             <div>
               <h2 className="text-3xl md:text-[40px] mb-2">Leadership</h2>
@@ -239,7 +239,7 @@ export default function AboutRoute() {
               href="/lecturers"
               className="hidden md:flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
             >
-              All Faculty <ArrowRight className="w-4 h-4" />
+              All Lecturers <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -250,7 +250,7 @@ export default function AboutRoute() {
                 href={`/lecturers/${person.id}`}
                 className="group flex gap-6 border border-border p-6 hover:border-primary transition-colors bg-background"
               >
-                <div className="relative w-24 h-24 flex-shrink-0 overflow-hidden bg-muted">
+                <div className="relative w-24 h-24 shrink-0 overflow-hidden bg-muted">
                   <ImageWithFallback
                     src={person.image}
                     alt={person.name}
@@ -279,7 +279,7 @@ export default function AboutRoute() {
 
       {/* History Timeline */}
       <section className="bg-muted border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-16">
+        <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
           <h2 className="text-3xl md:text-[40px] mb-3">Our Story</h2>
           <p className="text-muted-foreground mb-12 text-lg">
             Key milestones in our journey of growth.
@@ -287,18 +287,18 @@ export default function AboutRoute() {
 
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-[72px] top-0 bottom-0 w-px bg-border hidden md:block" />
+            <div className="absolute left-18 top-0 bottom-0 w-px bg-border hidden md:block" />
 
             <div className="space-y-6">
               {milestones.map((m, i) => (
                 <div key={i} className="flex items-start gap-8">
-                  <div className="flex-shrink-0 w-[72px] text-right">
+                  <div className="shrink-0 w-18 text-right">
                     <span className="text-sm font-bold text-primary">
                       {m.year}
                     </span>
                   </div>
                   <div className="relative flex items-start gap-4">
-                    <div className="flex-shrink-0 w-3 h-3 rounded-full bg-primary mt-1.5 hidden md:block" />
+                    <div className="shrink-0 w-3 h-3 rounded-full bg-primary mt-1.5 hidden md:block" />
                     <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
                       {m.event}
                     </p>
@@ -312,7 +312,7 @@ export default function AboutRoute() {
 
       {/* Contact */}
       <section className="bg-background">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-16">
+        <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl md:text-[40px] mb-6">Get In Touch</h2>
@@ -322,7 +322,7 @@ export default function AboutRoute() {
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium">Address</p>
                     <p className="text-sm text-muted-foreground">
@@ -334,7 +334,7 @@ export default function AboutRoute() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Phone className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Phone className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium">Phone</p>
                     <p className="text-sm text-muted-foreground">
@@ -343,7 +343,7 @@ export default function AboutRoute() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Mail className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Mail className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium">Email</p>
                     <p className="text-sm text-muted-foreground">

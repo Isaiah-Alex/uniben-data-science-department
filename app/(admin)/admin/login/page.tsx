@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,14 +12,21 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const router = useRouter();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
     // Wire up your auth logic here
     await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setError("Invalid credentials. Check your email and password.");
+    if (password === "password12" && email === "uniben@gmail.com") {
+      router.push("/admin");
+      setLoading(false);
+    } else {
+      setLoading(false);
+      setError("Invalid credentials. Check your email and password.");
+    }
   }
 
   return (
