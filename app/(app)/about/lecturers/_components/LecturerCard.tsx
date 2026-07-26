@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { ArrowRight, BookOpen } from 'lucide-react';
-import { ImageWithFallback } from '@/components/shared/ImageWithFallback';
-import { Lecturer } from '@/lib/data/faculty';
+import Link from "next/link";
+import { ArrowRight, BookOpen } from "lucide-react";
+import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { Lecturer } from "@/lib/data/faculty";
 
 interface LecturerCardProps {
   person: Lecturer;
@@ -10,7 +10,7 @@ interface LecturerCardProps {
 export function LecturerCard({ person }: LecturerCardProps) {
   return (
     <Link
-      href={`/lecturers/${person.id}`}
+      href={`/about/lecturers/${person.id}`}
       className="group flex flex-col border border-border overflow-hidden hover:border-primary transition-colors bg-background"
     >
       {/* Photo */}
@@ -28,7 +28,10 @@ export function LecturerCard({ person }: LecturerCardProps) {
 
       {/* Info */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-medium text-lg leading-tight mb-1" style={{ fontFamily: 'var(--font-serif)' }}>
+        <h3
+          className="font-medium text-lg leading-tight mb-1"
+          style={{ fontFamily: "var(--font-serif)" }}
+        >
           {person.name}
         </h3>
         <p className="text-sm text-primary font-medium mb-2">{person.role}</p>
@@ -39,7 +42,10 @@ export function LecturerCard({ person }: LecturerCardProps) {
         {/* Research tags */}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {person.researchTags.slice(0, 2).map((tag) => (
-            <span key={tag} className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-sm font-medium">
+            <span
+              key={tag}
+              className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-sm font-medium"
+            >
               {tag}
             </span>
           ))}

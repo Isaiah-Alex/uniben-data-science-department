@@ -76,6 +76,7 @@ export const recentPublications = [
     journal: "Journal of Data Science & Agricultural Research",
     year: "2026",
     doi: "#",
+    areaId: 1,
   },
   {
     title:
@@ -84,6 +85,7 @@ export const recentPublications = [
     journal: "IEEE Transactions on Neural Networks",
     year: "2026",
     doi: "#",
+    areaId: 2,
   },
   {
     title:
@@ -92,6 +94,7 @@ export const recentPublications = [
     journal: "Health Informatics Journal",
     year: "2025",
     doi: "#",
+    areaId: 3,
   },
   {
     title:
@@ -100,6 +103,7 @@ export const recentPublications = [
     journal: "Statistics in Medicine",
     year: "2025",
     doi: "#",
+    areaId: 4,
   },
   {
     title: "Federated Learning for Privacy-Preserving Healthcare Analytics",
@@ -107,6 +111,7 @@ export const recentPublications = [
     journal: "Nature Machine Intelligence",
     year: "2025",
     doi: "#",
+    areaId: 1,
   },
 ];
 

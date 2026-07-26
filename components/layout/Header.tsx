@@ -36,11 +36,12 @@ export function Header() {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "News", href: "/news" },
-    { label: "Programs", href: "/programs" },
+    { label: "Articles", href: "/articles" },
+    { label: "Archive", href: "/archive" },
+    // { label: "Programs", href: "/programs" },
     { label: "Research", href: "/research" },
     { label: "About", href: "/about" },
-    { label: "Lecturers", href: "/lecturers" },
+    { label: "Editors", href: "/authors" },
   ];
 
   const isActive = (href: string) => {

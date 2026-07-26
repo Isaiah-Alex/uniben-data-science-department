@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, Share2, ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { newsData } from "@/lib/data/news";
+import { articles } from "@/lib/data/articles";
 import { ReadingProgressBar } from "@/components/shared/ReadingProgressBar";
 
 function XLogo({ className }: { className?: string }) {
@@ -27,7 +27,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const article = newsData.find((item) => item.id.toString() === id);
+  const article = articles.find((item) => item.id.toString() === id);
   if (!article) return {};
   return {
     title: `${article.title} - Department of Data Science`,
@@ -35,17 +35,36 @@ export async function generateMetadata({
   };
 }
 
-export default async function NewsArticleRoute({ params }: PageProps) {
+export default async function ArticleRoute({ params }: PageProps) {
   const { id } = await params;
-  const article = newsData.find((item) => item.id.toString() === id);
+  const article = articles.find((item) => item.id.toString() === id);
   if (!article) {
     notFound();
   }
 
-  // Get related articles (exclude current one)
-  const relatedArticles = newsData
-    .filter((item) => item.id.toString() !== id)
-    .slice(0, 3);
+  // Get related articles: same category first, then shared tags, then recent fallback
+  const sameCategory = articles.filter(
+    (item) => item.id.toString() !== id && item.category === article.category,
+  );
+
+  const sharedTags = articles.filter(
+    (item) =>
+      item.id.toString() !== id &&
+      item.category !== article.category &&
+      item.tags.some((tag) => article.tags.includes(tag)),
+  );
+
+  const fallback = articles.filter(
+    (item) =>
+      item.id.toString() !== id &&
+      !sameCategory.includes(item) &&
+      !sharedTags.includes(item),
+  );
+
+  const relatedArticles = [...sameCategory, ...sharedTags, ...fallback].slice(
+    0,
+    3,
+  );
 
   return (
     <div>
@@ -56,11 +75,11 @@ export default async function NewsArticleRoute({ params }: PageProps) {
       <div className="border-b border-border bg-background">
         <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-4">
           <Link
-            href="/news"
+            href="/articles"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to News
+            Back to Articles
           </Link>
         </div>
       </div>
@@ -76,7 +95,14 @@ export default async function NewsArticleRoute({ params }: PageProps) {
             {article.title}
           </h1>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground pb-6 border-b border-border">
+          <p className="mt-4 text-base text-muted-foreground">
+            By{" "}
+            <span className="font-medium text-foreground">
+              {article.author.name}
+            </span>
+          </p>
+
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground pb-6 border-b border-border">
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
               {article.date}
@@ -180,7 +206,7 @@ export default async function NewsArticleRoute({ params }: PageProps) {
                   {relatedArticles.map((related) => (
                     <Link
                       key={related.id}
-                      href={`/news/${related.id}`}
+                      href={`/articles/${related.id}`}
                       className="group block pb-4 border-b border-border last:border-0"
                     >
                       <div className="relative aspect-video overflow-hidden mb-3 bg-muted">

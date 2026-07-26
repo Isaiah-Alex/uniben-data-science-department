@@ -27,12 +27,12 @@ export default function GlobalNotFound() {
                   Go to Homepage
                 </Button>
               </Link>
-              <Link href="/news">
+              <Link href="/articles">
                 <Button
                   variant="outline"
                   className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-6 text-lg flex items-center gap-2"
                 >
-                  View News
+                  View Articles
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>

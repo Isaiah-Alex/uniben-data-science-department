@@ -44,11 +44,11 @@ export default async function LecturerProfileRoute({ params }: PageProps) {
       <div className="border-b border-border bg-background">
         <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-4">
           <Link
-            href="/lecturers"
+            href="/about/lecturers"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Faculty
+            Back to Lecturers
           </Link>
         </div>
       </div>

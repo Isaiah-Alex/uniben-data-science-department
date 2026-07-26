@@ -2,6 +2,46 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
+  type QuickLink = {
+    routeName: string;
+    path: string;
+  };
+
+  const QUICK_LINKS: QuickLink[] = [
+    {
+      routeName: "Home",
+      path: "/",
+    },
+    {
+      routeName: "Articles",
+      path: "/articles",
+    },
+    {
+      routeName: "Archive",
+      path: "/archive",
+    },
+    {
+      routeName: "Research",
+      path: "/research",
+    },
+    {
+      routeName: "About",
+      path: "/about",
+    },
+    {
+      routeName: "Editors",
+      path: "/authors",
+    },
+    {
+      routeName: "Lecturers",
+      path: "/about/lecturers",
+    },
+    {
+      routeName: "Programs",
+      path: "/programs",
+    },
+  ];
+
   return (
     <footer className="bg-neutral-900 text-white border-t border-white/5">
       <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
@@ -71,46 +111,16 @@ export function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/news"
-                  className="text-neutral-400 hover:text-primary transition-colors"
-                >
-                  News & Events
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs"
-                  className="text-neutral-400 hover:text-primary transition-colors"
-                >
-                  Programs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/research"
-                  className="text-neutral-400 hover:text-primary transition-colors"
-                >
-                  Research
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-neutral-400 hover:text-primary transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/lecturers"
-                  className="text-neutral-400 hover:text-primary transition-colors"
-                >
-                  Lecturers
-                </Link>
-              </li>
+              {QUICK_LINKS.map((link) => (
+                <li key={link.routeName}>
+                  <Link
+                    href={link.path}
+                    className="text-neutral-400 hover:text-primary transition-colors"
+                  >
+                    {link.routeName}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

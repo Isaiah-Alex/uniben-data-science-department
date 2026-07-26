@@ -236,7 +236,7 @@ export default function AboutRoute() {
               </p>
             </div>
             <Link
-              href="/lecturers"
+              href="/about/lecturers"
               className="hidden md:flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
             >
               All Lecturers <ArrowRight className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function AboutRoute() {
             {leadership.map((person) => (
               <Link
                 key={person.id}
-                href={`/lecturers/${person.id}`}
+                href={`/about/lecturers/${person.id}`}
                 className="group flex gap-6 border border-border p-6 hover:border-primary transition-colors bg-background"
               >
                 <div className="relative w-24 h-24 shrink-0 overflow-hidden bg-muted">

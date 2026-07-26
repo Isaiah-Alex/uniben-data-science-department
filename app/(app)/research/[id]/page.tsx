@@ -7,7 +7,7 @@ import {
   BookOpen,
   Users,
   Share2,
-  Calendar,
+  // Calendar,
   Tag,
 } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
@@ -54,7 +54,9 @@ export default async function ResearchAreaRoute({ params }: PageProps) {
     .slice(0, 3);
 
   // Publications loosely tied to this area (you can wire up real filtering later)
-  const areaPublications = recentPublications.slice(0, 3);
+  const areaPublications = recentPublications.filter(
+    (pub) => pub.areaId === area.id,
+  );
 
   return (
     <div>

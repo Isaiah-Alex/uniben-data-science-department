@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { NewsItem } from "@/lib/data/news";
+import { Article, articles } from "@/lib/data/articles";
 
 interface HeroSectionProps {
-  featuredStory: NewsItem;
-  latestUpdates: NewsItem[];
+  featuredStory: Article;
+  latestUpdates: Article[];
 }
 
 export function HeroSection({
@@ -18,7 +18,10 @@ export function HeroSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Featured Story */}
           <div className="lg:col-span-8">
-            <Link href={`/news/${featuredStory.id}`} className="group block">
+            <Link
+              href={`/articles/${featuredStory.id}`}
+              className="group block"
+            >
               <div className="relative aspect-16/10 overflow-hidden bg-muted">
                 <ImageWithFallback
                   src={featuredStory.image}
@@ -37,6 +40,9 @@ export function HeroSection({
                   {featuredStory.summary}
                 </p>
                 <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
+                  <span className="font-medium text-foreground">
+                    By {featuredStory.author.name}
+                  </span>
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     {featuredStory.date}

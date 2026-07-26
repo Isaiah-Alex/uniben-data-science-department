@@ -12,11 +12,7 @@ import {
   CircleDot,
   Clock,
 } from "lucide-react";
-import type {
-  DashboardStat,
-  ActivityItem,
-  SiteSummary,
-} from "@/db/schema";
+import type { DashboardStat, ActivityItem, SiteSummary } from "@/db/schema";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 
 const iconMap = {
@@ -41,13 +37,13 @@ type Props = {
 
 export function DashboardShell({ stats, activity, summary }: Props) {
   return (
-    <div className="space-y-8 max-w-[1100px]">
+    <div className="space-y-8 max-w-275">
       {/* Page title */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Welcome back, Prof. Okonkwo — here&apos;s what&apos;s happening
-          across the department.
+          Welcome back, Prof. Okonkwo — here&apos;s what&apos;s happening across
+          the department.
         </p>
       </div>
 
@@ -98,7 +94,7 @@ export function DashboardShell({ stats, activity, summary }: Props) {
           <div className="divide-y divide-border">
             {activity.map((item, i) => (
               <div key={i} className="flex items-start gap-4 px-6 py-4">
-                <div className="flex-shrink-0 mt-0.5">
+                <div className="shrink-0 mt-0.5">
                   <CircleDot className="w-4 h-4 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -117,7 +113,7 @@ export function DashboardShell({ stats, activity, summary }: Props) {
                     </span>
                   </div>
                 </div>
-                <StatusBadge status={item.status} className="flex-shrink-0" />
+                <StatusBadge status={item.status} className="shrink-0" />
               </div>
             ))}
           </div>
@@ -140,7 +136,9 @@ export function DashboardShell({ stats, activity, summary }: Props) {
                   className="flex items-center gap-3 px-5 py-3.5 hover:bg-muted group transition-colors"
                 >
                   <Icon className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-foreground flex-1">{label}</span>
+                  <span className="text-sm text-foreground flex-1">
+                    {label}
+                  </span>
                   <ArrowRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               ))}

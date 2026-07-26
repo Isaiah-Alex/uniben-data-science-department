@@ -3,10 +3,12 @@ import { ArrowRight, BookOpen, Users, Microscope, Globe } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { Button } from "@/components/ui/button";
 import { labs, recentPublications, researchAreas, stats } from "@/db/seed";
-import { newsData, NewsItem } from "@/lib/data/news";
+import { articles } from "@/lib/data/articles";
+// import { articles, Article } from "@/lib/data/articles";
 
 export default function ResearchPage() {
-  const featuredStory = newsData[0];
+  // const featuredStory = articles[0];
+  const researchArticles = articles.filter((a) => a.category === "Research");
 
   return (
     <div className="min-h-screen bg-background">
@@ -163,7 +165,61 @@ export default function ResearchPage() {
           </div>
         </div>
       </section>
+      {/* From Our Research Articles */}
+      {researchArticles.length > 0 && (
+        <section className="border-b border-border">
+          <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
+            <div className="flex justify-between items-center mb-10">
+              <div>
+                <h2 className="text-3xl md:text-[40px] mb-2">
+                  From Our Research Articles
+                </h2>
+                <p className="text-muted-foreground">
+                  Stories, updates, and breakthroughs from our research teams
+                </p>
+              </div>
+              <Link
+                href="/articles?category=research"
+                className="hidden md:flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              >
+                View all research articles <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {researchArticles.map((article) => (
+                <Link
+                  key={article.id}
+                  href={`/articles/${article.id}`}
+                  className="group bg-background overflow-hidden border border-border shadow-sm"
+                >
+                  <div className="relative aspect-4/3 overflow-hidden">
+                    <ImageWithFallback
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                      {article.category}
+                    </span>
+                    <h3
+                      className="mt-2 font-medium leading-snug group-hover:text-primary transition-colors text-[20px]"
+                      style={{ fontFamily: "var(--font-serif)" }}
+                    >
+                      {article.title}
+                    </h3>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      {article.date}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       {/* Recent Publications */}
       <section className="bg-secondary border-b border-border">
         <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-16">
