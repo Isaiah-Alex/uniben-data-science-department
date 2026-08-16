@@ -1,4 +1,4 @@
-import { articles } from "@/lib/data/articles";
+import { getMergedArticles } from "@/lib/data/submissions";
 import { facultyData } from "@/lib/data/faculty";
 import { programsData } from "@/lib/data/programs";
 
@@ -14,6 +14,7 @@ import { categories } from "@/lib/data/categories";
 import { NewsletterSection } from "./_components/NewslettterSection";
 
 export default function HomeRoute() {
+  const articles = getMergedArticles();
   const featuredStory = articles[0];
   const latestUpdates = articles.slice(1, 6);
   const featuredArticle = articles.slice(1, 4);
@@ -21,6 +22,7 @@ export default function HomeRoute() {
   const researchArticles = articles
     .filter((article) => article.category === "Research")
     .slice(0, 3);
+
 
   return (
     <div>

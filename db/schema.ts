@@ -97,6 +97,6 @@ export type DashboardStat = {
   value: string;
   change: string;
   href: string;
-  iconName: "BookOpen" | "FlaskConical" | "Users" | "Newspaper";
+  iconName: "BookOpen" | "FlaskConical" | "Users" | "FileText";
   color: string;
 };
