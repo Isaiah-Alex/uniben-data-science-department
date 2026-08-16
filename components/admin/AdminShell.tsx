@@ -8,6 +8,7 @@ import {
   BookOpen,
   FlaskConical,
   Users,
+  UserPen,
   Settings,
   Menu,
   X,
@@ -15,16 +16,19 @@ import {
   ChevronRight,
   LogOut,
   ExternalLink,
-  Newspaper,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMockAuth } from "@/lib/mock-auth";
+import { RoleSwitcher } from "@/components/admin/RoleSwitcher";
 
 const navItems = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "News", href: "/admin/news", icon: Newspaper },
+  { label: "Articles", href: "/admin/articles", icon: FileText },
   { label: "Programs", href: "/admin/programs", icon: BookOpen },
   { label: "Research", href: "/admin/research", icon: FlaskConical },
   { label: "Lecturers", href: "/admin/lecturers", icon: Users },
+  { label: "Editors", href: "/admin/editors", icon: UserPen },
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
@@ -34,6 +38,7 @@ export default function AdminShell({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { currentUser } = useMockAuth();
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
@@ -41,7 +46,7 @@ export default function AdminShell({ children }: Props) {
   const currentPage = navItems.find((n) => isActive(n.href))?.label ?? "Admin";
 
   //functions
-  const handleSIgnout = () => {
+  const handleSignout = () => {
     router.push("/admin/login");
   };
 
@@ -120,7 +125,7 @@ export default function AdminShell({ children }: Props) {
             View Site
           </Link>
           <button
-            onClick={() => handleSIgnout()}
+            onClick={() => handleSignout()}
             className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-sm text-sidebar-primary-foreground/50 hover:bg-white/5 hover:text-destructive transition-colors"
           >
             <LogOut className="h-4 w-4" />
@@ -131,15 +136,15 @@ export default function AdminShell({ children }: Props) {
         {/* Profile */}
         <div className="px-4 pb-4">
           <div className="flex items-center gap-3 rounded bg-white/5 p-3">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
-              AO
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground uppercase">
+              {currentUser.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
             </div>
             <div className="min-w-0">
               <p className="truncate text-xs font-medium text-sidebar-primary-foreground">
-                Prof. A. Okonkwo
+                {currentUser.name}
               </p>
-              <p className="truncate text-[11px] text-sidebar-primary-foreground/40">
-                Head of Department
+              <p className="truncate text-[11px] text-sidebar-primary-foreground/40 uppercase tracking-wider">
+                {currentUser.role}
               </p>
             </div>
           </div>
@@ -163,7 +168,8 @@ export default function AdminShell({ children }: Props) {
             <span className="font-medium text-foreground">{currentPage}</span>
           </div>
 
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-4">
+            <RoleSwitcher />
             <button className="relative rounded p-1.5 hover:bg-muted">
               <Bell className="h-5 w-5 text-muted-foreground" />
               <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-primary" />

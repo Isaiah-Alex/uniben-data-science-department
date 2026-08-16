@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, Share2, ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { articles } from "@/lib/data/articles";
+import { getMergedArticles } from "@/lib/data/submissions";
 import { ReadingProgressBar } from "@/components/shared/ReadingProgressBar";
 
 function XLogo({ className }: { className?: string }) {
@@ -27,7 +27,8 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const article = articles.find((item) => item.id.toString() === id);
+  const merged = getMergedArticles();
+  const article = merged.find((item) => item.id.toString() === id);
   if (!article) return {};
   return {
     title: `${article.title} - Department of Data Science`,
@@ -37,24 +38,25 @@ export async function generateMetadata({
 
 export default async function ArticleRoute({ params }: PageProps) {
   const { id } = await params;
-  const article = articles.find((item) => item.id.toString() === id);
+  const merged = getMergedArticles();
+  const article = merged.find((item) => item.id.toString() === id);
   if (!article) {
     notFound();
   }
 
   // Get related articles: same category first, then shared tags, then recent fallback
-  const sameCategory = articles.filter(
+  const sameCategory = merged.filter(
     (item) => item.id.toString() !== id && item.category === article.category,
   );
 
-  const sharedTags = articles.filter(
+  const sharedTags = merged.filter(
     (item) =>
       item.id.toString() !== id &&
       item.category !== article.category &&
       item.tags.some((tag) => article.tags.includes(tag)),
   );
 
-  const fallback = articles.filter(
+  const fallback = merged.filter(
     (item) =>
       item.id.toString() !== id &&
       !sameCategory.includes(item) &&

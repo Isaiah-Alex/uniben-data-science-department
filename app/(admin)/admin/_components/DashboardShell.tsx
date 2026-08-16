@@ -6,12 +6,15 @@ import {
   FlaskConical,
   Users,
   Newspaper,
-  TrendingUp,
+  UserPen,
+  Settings,
   ArrowRight,
   ArrowUpRight,
   CircleDot,
   Clock,
+  FileText,
 } from "lucide-react";
+
 import type { DashboardStat, ActivityItem, SiteSummary } from "@/db/schema";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 
@@ -19,14 +22,16 @@ const iconMap = {
   BookOpen,
   FlaskConical,
   Users,
-  Newspaper,
+  FileText,
 };
 
 const quickLinks = [
+  { label: "Manage Articles", href: "/admin/articles", icon: FileText },
   { label: "Manage Programs", href: "/admin/programs", icon: BookOpen },
   { label: "Manage Research", href: "/admin/research", icon: FlaskConical },
   { label: "Manage Lecturers", href: "/admin/lecturers", icon: Users },
-  { label: "Site Settings", href: "/admin/settings", icon: TrendingUp },
+  { label: "Manage Editors", href: "/admin/editors", icon: UserPen },
+  { label: "Site Settings", href: "/admin/settings", icon: Settings },
 ];
 
 type Props = {
