@@ -40,6 +40,10 @@ export function Footer() {
       routeName: "Programs",
       path: "/programs",
     },
+    {
+      routeName: "Submit an article",
+      path: "/articles/submit",
+    },
   ];
 
   return (

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
-export default function AdminLoginPage() {
+function AdminLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,20 +14,42 @@ export default function AdminLoginPage() {
   const [error, setError] = useState("");
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    // Wire up your auth logic here
-    await new Promise((r) => setTimeout(r, 1200));
-    if (password === "password12" && email === "uniben@gmail.com") {
-      router.push("/admin");
-      setLoading(false);
-    } else {
+
+    const { data: signInData, error: signInError } =
+      await supabase.auth.signInWithPassword({ email, password });
+
+    if (signInError || !signInData.user) {
       setLoading(false);
       setError("Invalid credentials. Check your email and password.");
+      return;
     }
+
+    // This page is for staff only — a valid client login should not
+    // land them in the admin portal, even with the right password.
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", signInData.user.id)
+      .single();
+
+    const staffRoles = ["editor", "reviewer", "admin"];
+    if (!profile || !staffRoles.includes(profile.role)) {
+      await supabase.auth.signOut();
+      setLoading(false);
+      setError("This account does not have admin access.");
+      return;
+    }
+
+    const redirect = searchParams.get("redirect") || "/admin/articles";
+    router.push(redirect);
+    router.refresh();
   }
 
   return (
@@ -246,5 +269,13 @@ export default function AdminLoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <AdminLoginForm />
+    </Suspense>
   );
 }

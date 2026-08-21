@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, Share2, ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { getMergedArticles } from "@/lib/data/submissions";
+import { getMergedArticles } from "@/lib/data/submissions-server";
 import { ReadingProgressBar } from "@/components/shared/ReadingProgressBar";
 
 function XLogo({ className }: { className?: string }) {
@@ -27,7 +27,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const merged = getMergedArticles();
+  const merged = await getMergedArticles();
   const article = merged.find((item) => item.id.toString() === id);
   if (!article) return {};
   return {
@@ -38,7 +38,7 @@ export async function generateMetadata({
 
 export default async function ArticleRoute({ params }: PageProps) {
   const { id } = await params;
-  const merged = getMergedArticles();
+  const merged = await getMergedArticles();
   const article = merged.find((item) => item.id.toString() === id);
   if (!article) {
     notFound();

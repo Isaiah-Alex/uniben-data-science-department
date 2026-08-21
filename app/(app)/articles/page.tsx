@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getMergedArticles } from "@/lib/data/submissions";
+import { getMergedArticles } from "@/lib/data/submissions-server";
 import { ArticleContent } from "./_components/ArticleContent";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ interface ArticlesPageProps {
 
 export default async function Articles({ searchParams }: ArticlesPageProps) {
   const { category } = await searchParams;
-  const mergedArticles = getMergedArticles();
+  const mergedArticles = await getMergedArticles();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -36,9 +36,11 @@ export default async function Articles({ searchParams }: ArticlesPageProps) {
       </div>
 
       <div className="max-w-300 mx-auto px-4 md:px-6 lg:px-8 py-12">
-        <ArticleContent allArticle={mergedArticles} initialCategory={category} />
+        <ArticleContent
+          allArticle={mergedArticles}
+          initialCategory={category}
+        />
       </div>
     </div>
   );
 }
-

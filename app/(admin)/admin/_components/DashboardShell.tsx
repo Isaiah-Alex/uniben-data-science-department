@@ -5,7 +5,6 @@ import {
   BookOpen,
   FlaskConical,
   Users,
-  Newspaper,
   UserPen,
   Settings,
   ArrowRight,

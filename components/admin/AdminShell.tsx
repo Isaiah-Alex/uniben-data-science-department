@@ -19,8 +19,7 @@ import {
   FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useMockAuth } from "@/lib/mock-auth";
-import { RoleSwitcher } from "@/components/admin/RoleSwitcher";
+import { useAuth } from "@/lib/auth/AuthProvider";
 
 const navItems = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -38,17 +37,26 @@ export default function AdminShell({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { currentUser } = useMockAuth();
+  const { user: currentUser, loading, signOut } = useAuth();
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
 
   const currentPage = navItems.find((n) => isActive(n.href))?.label ?? "Admin";
 
-  //functions
-  const handleSignout = () => {
+  const handleSignout = async () => {
+    await signOut();
     router.push("/admin/login");
+    router.refresh();
   };
+
+  if (loading || !currentUser) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-secondary text-sm text-muted-foreground">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-secondary">
@@ -125,7 +133,7 @@ export default function AdminShell({ children }: Props) {
             View Site
           </Link>
           <button
-            onClick={() => handleSignout()}
+            onClick={handleSignout}
             className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-sm text-sidebar-primary-foreground/50 hover:bg-white/5 hover:text-destructive transition-colors"
           >
             <LogOut className="h-4 w-4" />
@@ -137,7 +145,11 @@ export default function AdminShell({ children }: Props) {
         <div className="px-4 pb-4">
           <div className="flex items-center gap-3 rounded bg-white/5 p-3">
             <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground uppercase">
-              {currentUser.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+              {currentUser.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)}
             </div>
             <div className="min-w-0">
               <p className="truncate text-xs font-medium text-sidebar-primary-foreground">
@@ -169,7 +181,6 @@ export default function AdminShell({ children }: Props) {
           </div>
 
           <div className="ml-auto flex items-center gap-4">
-            <RoleSwitcher />
             <button className="relative rounded p-1.5 hover:bg-muted">
               <Bell className="h-5 w-5 text-muted-foreground" />
               <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-primary" />

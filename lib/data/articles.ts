@@ -1,5 +1,5 @@
 export interface Article {
-  id: number;
+  id: number | string;
   slug: string; // new — cleaner URLs than raw IDs for /articles/[slug]
   image: string;
   category: string; // primary category (kept from NewsItem)
