@@ -17,7 +17,8 @@ export const authors: Author[] = [
     slug: "editorial-board",
     role: "Department of Data Science",
     bio: "Official announcements and updates published on behalf of the Department of Data Science.",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
+    avatar:
+      "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=400",
   },
   {
     name: "Dr. Tunde Adeleke",
@@ -25,7 +26,7 @@ export const authors: Author[] = [
     role: "Senior Lecturer, AI & NLP",
     bio: "Dr. Adeleke researches explainable AI and low-resource language processing, with recent work published in leading international journals.",
     avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "https://images.unsplash.com/photo-1688120320082-f23f0c1425be?w=400",
     researchInterests: [
       "Natural Language Processing",
       "Low-Resource Languages",
@@ -42,7 +43,7 @@ export const authors: Author[] = [
     role: "Lecturer, Curriculum & Generative AI",
     bio: "Dr. Ojo leads curriculum development for the department's Generative AI and LLM Engineering tracks.",
     avatar:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400",
+      "https://images.unsplash.com/photo-1652095319417-4bf8a0de1a3d?w=400",
     researchInterests: [
       "Generative AI",
       "Prompt Engineering",
@@ -50,11 +51,12 @@ export const authors: Author[] = [
     ],
   },
   {
-    name: "Prof. Adebayo Okonkwo",
-    slug: "prof-adebayo-okonkwo",
+    name: "Prof. Mrs Konyeha S.",
+    slug: "prof-konyeha-s",
     role: "Head of Department",
-    bio: "Prof. Okonkwo's research spans smart agriculture systems, IoT, and applied machine learning for African development challenges.",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
+    bio: "Prof. Konyeha's research spans smart agriculture systems, IoT, and applied machine learning for African development challenges.",
+    avatar:
+      "https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=1080&q=80",
     researchInterests: [
       "Smart Agriculture",
       "IoT Systems",
